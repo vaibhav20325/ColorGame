@@ -52,6 +52,7 @@
       function newGame() {
         for (var i=0;i<n;i++) {
           t[i].style.background=getRandomColor();
+          t[i].style.border = '1px solid white';
         }
         
         x = Math.floor(Math.random() * n + 1);
@@ -71,18 +72,22 @@
              }
           document.getElementById("header").style.background = correctColor;
         } else {
-          tries-=1;
+          if (event.currentTarget.style.background != "black") {
+            tries-=1;
+          }
           document.getElementById("tries-clue").innerHTML = 'Tries Left:'+tries;
           if (tries== 0) {
             document.getElementById("header").style.background = correctColor;
             t.forEach(e => {
               if (e.style.background != correctColor) {
                 e.style.background = "black";
+                e.style.border = "black";
               }
               
             });
           }
           event.currentTarget.style.background = "black";
+          event.currentTarget.style.border = "black";
         }
       })
       t[i].addEventListener("mouseover", function (event) {
