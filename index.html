@@ -4,24 +4,42 @@
   <head>
     <title>Color Game</title>
     <link rel="stylesheet" href="./index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Permanent+Marker&display=swap" rel="stylesheet">
   </head>
   <body onload="newGame()">
     <div id="header">
-      <h2>The Great</h2>
+      <h1>The Great</h1>
       <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
-      <h2>Guessing Game</h2>
+      <h1>Guessing Game</h1>
+    </div>
+    <div id='info'>
+      <div id='tries'>
+        <h2 id='tries-clue'>Tries Left:</h2>
+      </div>
+      <div id='new'>
+        <h2>New Game</h2>
+      </div>
     </div>
     <div id="container">
       <div class="tile" id="1"></div>
       <div class="tile" id="2"></div>
+      <div class="tile" id="3"></div>
+      <div class="tile" id="4"></div>
+      <div class="tile" id="5"></div>
+      <div class="tile" id="6"></div>
     </div>
 
     <script>
-      var t1 = document.getElementById("1");
-      var t2 = document.getElementById("2");
+      var tries
       var x;
       var correctColor;
-
+      var t=[];
+      var n=6;
+      for (var i=0;i<n;i++) {
+        t[i]= document.getElementById(String(i+1));
+      }
+      var newg=document.getElementById('new');
       function getRandomColor() {
         var letters = "0123456789ABCDEF";
         var color = "#";
@@ -32,35 +50,47 @@
       }
 
       function newGame() {
-        t1.style.background = getRandomColor();
-        t2.style.background = getRandomColor();
-
-        x = Math.floor(Math.random() * 2 + 1);
-
-        if (x == 1) correctColor = t1.style.background;
-        else correctColor = t2.style.background;
-        /* console.log(x);
-        console.log(correctColor); */
-
+        for (var i=0;i<n;i++) {
+          t[i].style.background=getRandomColor();
+        }
+        
+        x = Math.floor(Math.random() * n + 1);
+        tries=4
+        correctColor = t[x-1].style.background;
         document.getElementById("header-clue").innerHTML = correctColor;
+        document.getElementById("tries-clue").innerHTML = 'Tries Left:'+tries;
       }
-
-      t1.addEventListener("click", function () {
-        if (t1.style.background == correctColor) {
-          t2.style.background = correctColor;
+      
+      for (var i=0;i<n;i++) {
+        t[i].addEventListener("click", function (event) {
+          if (event.currentTarget.style.background == correctColor) {
+            for (var j=0;j<6;j++) {
+              if (j!=event.currentTarget) {
+                t[j].style.background = correctColor;
+              }
+             }
           document.getElementById("header").style.background = correctColor;
         } else {
-          t1.style.background = "black";
+          tries-=1;
+          document.getElementById("tries-clue").innerHTML = 'Tries Left:'+tries;
+          if (tries== 0) {
+            document.getElementById("header").style.background = correctColor;
+            t.forEach(e => {
+              if (e.style.background != correctColor) {
+                e.style.background = "black";
+              }
+              
+            });
+          }
+          event.currentTarget.style.background = "black";
         }
-      });
-
-      t2.addEventListener("click", function () {
-        if (t2.style.background == correctColor) {
-          t1.style.background = correctColor;
-          document.getElementById("header").style.background = correctColor;
-        } else {
-          t2.style.background = "black";
-        }
+      })
+      t[i].addEventListener("mouseover", function (event) {
+        //event.currentTarget.style.height *= 2;
+        
+      })};
+      newg.addEventListener("click", function () {
+        newGame()
       });
     </script>
   </body>
