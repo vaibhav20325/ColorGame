@@ -50,8 +50,8 @@
         return color;
       }
       function tries_inp(){
-        var m = prompt('Enter Number Of Tries(should be between 1 and 6)', '4');
-        if (m>0 && m<7 && m%1==0) {
+        var m = prompt('Enter Number Of Tries(should be between 1 and 5)', '4');
+        if (m>0 && m<6 && m%1==0) {
           tries=m;
           document.getElementById("tries-clue").innerHTML = 'Tries Left:'+tries;
         }
