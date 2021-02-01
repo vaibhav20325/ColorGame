@@ -14,14 +14,56 @@
 
 #container {
   background-color: black;
-  height: 70vh;
+  height: 68vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
+  font-family: 'Londrina Solid', cursive;
 }
-
+h1 {
+  font-family: 'Londrina Solid', cursive;
+  font-size: 50px;
+}
+h2 {
+  font-family: 'Londrina Solid', cursive;
+}
+#info {
+  background-color: black;
+  height: 2vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+#tries {
+  background-color: rgb(127, 245, 117);
+  border: 3px solid #4CAF50;
+  height: 20px;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 8px;
+}
+#new {
+  border-radius: 8px;
+  height: 20px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: rgb(127, 245, 117);
+  color: black;
+  border: 3px solid #4CAF50;
+  transition-duration: 0.4s;
+}
+#new:hover {
+  background-color: #4CAF50;
+  color: white;
+}
 .tile {
-  height: 200px;
-  width: 200px;
+  height: 35%;
+  width: 30%;
+  background-color: aliceblue;
+}
+.tile:hover {
+  height: 38%;
+  width: 32%;
   background-color: aliceblue;
 }
